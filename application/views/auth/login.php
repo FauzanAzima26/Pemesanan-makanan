@@ -46,7 +46,7 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
                     <h4 class="mb-1">Welcome to Vuexy! 👋</h4>
                     <p class="mb-6">Please sign-in to your account and start the adventure</p>
 
-                    <form id="formAuthentication" class="mb-4" action="index.html" method="GET">
+                    <form id="formAuthentication" class="mb-4" action="<?= site_url('login/process')?>" method="POST">
                         <div class="mb-6">
                             <label for="email" class="form-label">Email or Username</label>
                             <input
