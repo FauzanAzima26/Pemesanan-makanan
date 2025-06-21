@@ -15,6 +15,8 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <title>Login Basic - Pages | Vuexy - Bootstrap Admin Template</title>
 
     <meta name="description" content="" />

@@ -1,13 +1,12 @@
 <?php
-// Load header
-$this->load->view('auth/template/header', ['title' => 'User Login']);
+$this->load->view('auth/template/header');
 ?>
 <!-- Content -->
 
 <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner py-6">
-            <!-- Login -->
+            <!-- Register Card -->
             <div class="card">
                 <div class="card-body">
                     <!-- Logo -->
@@ -43,8 +42,8 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-1">Welcome to Vuexy! 👋</h4>
-                    <p class="mb-6">Please sign-in to your account and start the adventure</p>
+                    <h4 class="mb-1">Adventure starts here 🚀</h4>
+                    <p class="mb-6">Make your app management easy and fun!</p>
 
                     <?php if ($this->session->flashdata('error')): ?>
                         <div style="color: red;">
@@ -52,16 +51,24 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
                         </div>
                     <?php endif; ?>
 
-                    <form id="formAuthentication" class="mb-4" action="<?= site_url('login/process') ?>" method="POST">
+                    <form id="formAuthentication" class="mb-6" action="<?= site_url('auth/register/process') ?>" method="POST">
                         <div class="mb-6">
-                            <label for="email" class="form-label">Email or Username</label>
+                            <label for="name" class="form-label">Username</label>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="email"
-                                name="email-username"
-                                placeholder="Enter your email or username"
+                                id="name"
+                                name="name"
+                                placeholder="Enter your username"
                                 autofocus />
+                        </div>
+                        <div class="mb-6">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" />
+                        </div>
+                        <div class="mb-6">
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter your phone" />
                         </div>
                         <div class="mb-6 form-password-toggle">
                             <label class="form-label" for="password">Password</label>
@@ -76,26 +83,25 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
                         </div>
+
                         <div class="my-8">
-                            <div class="d-flex justify-content-between">
-                                <div class="form-check mb-0 ms-2">
-                                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                                    <label class="form-check-label" for="remember-me"> Remember Me </label>
-                                </div>
-                                <a href="auth-forgot-password-basic.html">
-                                    <p class="mb-0">Forgot Password?</p>
-                                </a>
+                            <div class="form-check mb-0 ms-2">
+                                <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
+                                <label class="form-check-label" for="terms-conditions">
+                                    I agree to
+                                    <a href="javascript:void(0);">privacy policy & terms</a>
+                                </label>
                             </div>
                         </div>
-                        <div class="mb-6">
-                            <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
-                        </div>
+                        <!-- reCAPTCHA -->
+                        <div class="g-recaptcha" data-sitekey="6Ld25GgrAAAAAFYUpuT6QGJsGJw0XcxMHym8x4-r"></div>
+                        <button class="btn btn-primary mt-8 d-grid w-100">Sign up</button>
                     </form>
 
                     <p class="text-center">
-                        <span>New on our platform?</span>
-                        <a href="<?= site_url('auth/register/index') ?>">
-                            <span>Create an account</span>
+                        <span>Already have an account?</span>
+                        <a href="auth-login-basic.html">
+                            <span>Sign in instead</span>
                         </a>
                     </p>
 
@@ -122,7 +128,7 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
                     </div>
                 </div>
             </div>
-            <!-- /Register -->
+            <!-- Register Card -->
         </div>
     </div>
 </div>
@@ -130,6 +136,5 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
 <!-- / Content -->
 
 <?php
-// Load footer
 $this->load->view('auth/template/footer');
 ?>

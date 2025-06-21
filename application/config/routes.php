@@ -53,8 +53,11 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['login'] = 'auth/Login/index';       // Halaman login
-$route['login/process'] = 'auth/Login/process_login'; // Proses login
-$route['logout'] = 'auth/Login/logout';     // Proses logout
+$route['login'] = 'auth/login/index';      
+$route['login/process'] = 'auth/login/process_login'; 
+$route['logout'] = 'auth/Login/logout';     
+
+$route['regist'] = 'auth/register/index';
+$route['regist/process'] = 'auth/register/process';
 
 $route['dashboard'] = 'admin/dashboard/index';

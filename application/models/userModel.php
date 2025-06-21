@@ -13,4 +13,10 @@ class userModel extends CI_Model
         return $this->db->get_where('users', ['email' => $email])->row();
     }
 
+    public function insert_user($data)
+    {
+        $this->db->insert('users', $data);
+        return $this->db->insert_id(); // ID terakhir dikembalikan ke controller
+    }
+
 }
