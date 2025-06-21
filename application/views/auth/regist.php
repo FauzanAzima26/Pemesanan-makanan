@@ -42,7 +42,7 @@ $this->load->view('auth/template/header');
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-1">Adventure starts here 🚀</h4>
+                    <h4 class="mb-1">Registrasi</h4>
                     <p class="mb-6">Make your app management easy and fun!</p>
 
                     <?php if ($this->session->flashdata('error')): ?>
@@ -93,8 +93,9 @@ $this->load->view('auth/template/header');
                                 </label>
                             </div>
                         </div>
-                        <!-- reCAPTCHA -->
-                        <div class="g-recaptcha" data-sitekey="6Ld25GgrAAAAAFYUpuT6QGJsGJw0XcxMHym8x4-r"></div>
+                        <p>Masukkan kode CAPTCHA:</p>
+                        <?= $captcha_image ?><br>
+                        <input class="mt-3" type="text" name="captcha" placeholder="Kode di atas"><br><br>
                         <button class="btn btn-primary mt-8 d-grid w-100">Sign up</button>
                     </form>
 
