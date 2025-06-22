@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -53,9 +53,9 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['login'] = 'auth/login';      
-$route['login/process'] = 'auth/login/process_login'; 
-$route['logout'] = 'auth/Login/logout';     
+$route['login'] = 'auth/login';
+$route['login/process'] = 'auth/login/process_login';
+$route['logout'] = 'auth/Login/logout';
 
 $route['regist'] = 'auth/register';
 $route['regist/process'] = 'auth/register/process';
@@ -66,3 +66,6 @@ $route['dashboard'] = 'admin/dashboard';
 
 $route['restaurant'] = 'admin/restaurant';
 $route['restaurant/get_data'] = 'admin/restaurant/get_data';
+$route['restaurant/store'] = 'admin/restaurant/store';
+$route['restaurant/edit'] = 'admin/restaurant/edit';
+$route['restaurant/delete'] = 'admin/restaurant/delete';

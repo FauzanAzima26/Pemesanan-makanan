@@ -13,14 +13,18 @@ class RestaurantModel extends CI_Model
 
   public function get_by_id($id)
   {
-    return $this->db->get_where('restaurants', ['id_owner' => $id])->row();
+    return $this->db->get_where('restaurants', ['id' => $id])->row();
   }
 
   public function update($id, $data)
   {
-    $this->db->where('id_restaurants', $id);
+    $this->db->where('id', $id);
     return $this->db->update('restaurants', $data);
   }
 
-
+  public function delete($id)
+  {
+    $this->db->where('id', $id);
+    return $this->db->delete('restaurants');
+  }
 }

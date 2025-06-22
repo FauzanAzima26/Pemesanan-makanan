@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 /**
  * @property CI_Session $session
  * @property restaurantModel $restaurantModel
+ * @property CI_Input $input
  */
 class Restaurant extends CI_Controller
 {
@@ -43,7 +44,7 @@ class Restaurant extends CI_Controller
                 'address' => $restaurant->address,
                 'status' => $restaurant->status,
                 'actions' => '
-                    <button class="btn btn-sm btn-warning" data-id="' . $restaurant->id . '">Edit</button>
+                    <button class="btn btn-sm btn-warning edit" data-id="' . $restaurant->id . '">Edit</button>
                     <button class="btn btn-sm btn-danger" data-id="' . $restaurant->id . '">Delete</button>
                 ',
             ];
@@ -55,5 +56,111 @@ class Restaurant extends CI_Controller
         ];
 
         echo json_encode($output);
+    }
+
+    public function store()
+    {
+        // Ambil input dari form
+        $id_restaurant = $this->input->post('id_restaurant');
+        $owner = $this->input->post('owner');
+        $name = $this->input->post('name');
+        $address = $this->input->post('address');
+        $status = $this->input->post('status');
+
+        // Validasi sederhana
+        if (empty($owner) || empty($name) || empty($address) || empty($status)) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Semua field wajib diisi.'
+            ]);
+            return;
+        }
+
+        // Siapkan data
+        $data = [
+            'owner' => $owner,
+            'name' => $name,
+            'address' => $address,
+            'status' => $status,
+        ];
+
+        // Proses update jika ID tersedia
+        if (!empty($id_restaurant)) {
+            $updated = $this->restaurantModel->update($id_restaurant, $data);
+            if ($updated) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Data berhasil diperbarui.'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Gagal memperbarui data.'
+                ]);
+            }
+        } else {
+            // Proses insert
+            $saved = $this->restaurantModel->insert($data);
+            if ($saved) {
+                echo json_encode([
+                    'success' => true,
+                    'message' => 'Data berhasil disimpan.'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Gagal menyimpan data.'
+                ]);
+            }
+        }
+    }
+
+    public function edit()
+    {
+        $id = $this->input->get('id');
+        if (!$id) {
+            echo json_encode([
+                'status' => false,
+                'message' => 'ID tidak ditemukan'
+            ]);
+            return;
+        }
+
+        $restaurant = $this->restaurantModel->get_by_id($id);
+        if ($restaurant) {
+            echo json_encode($restaurant);
+        } else {
+            echo json_encode([
+                'status' => false,
+                'message' => 'Data tidak ditemukan'
+            ]);
+        }
+    }
+
+    public function delete()
+    {
+        $id = $this->input->post('id');
+
+        if (!$id || !is_numeric($id)) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'ID tidak valid.'
+            ]);
+            return;
+        }
+
+        $deleted = $this->restaurantModel->delete($id);
+
+        if ($deleted) {
+            echo json_encode([
+                'success' => true,
+                'message' => 'Data berhasil dihapus.'
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Gagal menghapus data.'
+            ]);
+        }
     }
 }
