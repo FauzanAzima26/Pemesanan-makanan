@@ -93,9 +93,8 @@ $this->load->view('auth/template/header');
                                 </label>
                             </div>
                         </div>
-                        <p>Masukkan kode CAPTCHA:</p>
-                        <?= $captcha_image ?><br>
-                        <input class="mt-3" type="text" name="captcha" placeholder="Kode di atas"><br><br>
+                        <!-- reCAPTCHA -->
+                        <div class="g-recaptcha" data-sitekey="6LfuZmkrAAAAAJ-iARaPaqlL6BdrF3n3sG6Yn3yY"></div>
                         <button class="btn btn-primary mt-8 d-grid w-100">Sign up</button>
                     </form>
 
@@ -135,6 +134,8 @@ $this->load->view('auth/template/header');
 </div>
 
 <!-- / Content -->
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <?php
 $this->load->view('auth/template/footer');
