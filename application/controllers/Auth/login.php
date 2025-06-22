@@ -29,7 +29,6 @@ class Login extends CI_Controller
 
     public function process_login()
     {
-        // Ubah validasi sesuai nama field di form
         $this->form_validation->set_rules('email-username', 'Email/Username', 'required');
         $this->form_validation->set_rules('password', 'Password', 'required');
 
@@ -40,23 +39,30 @@ class Login extends CI_Controller
             $email = $this->input->post('email-username');
             $password = $this->input->post('password');
 
-            $user = $this->userModel->get_user_by_email($email, $password);
+            // Ambil user berdasarkan email saja (tanpa cek password dulu)
+            $user = $this->userModel->get_user_by_email($email);
 
-            if ($user) {
+            if ($user && password_verify($password, $user->password)) {
+                if ($user->is_verified == 0) {
+                    $this->session->set_flashdata('error', 'Akun belum diverifikasi. Silakan cek email Anda.');
+                    redirect('login');
+                }
+
                 $user_data = array(
-                    'user_id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'role' => $user->role,
+                    'user_id'   => $user->id,
+                    'name'      => $user->name,
+                    'email'     => $user->email,
+                    'role'      => $user->role,
                     'logged_in' => true
                 );
 
                 $this->session->set_userdata($user_data);
 
+                // Redirect sesuai role
                 if ($user->role == 'admin') {
                     redirect('admin/dashboard');
                 } elseif ($user->role == 'courier') {
-                    redirect('admin/dashboard');
+                    redirect('courier/dashboard');
                 } else {
                     redirect('admin/dashboard');
                 }
