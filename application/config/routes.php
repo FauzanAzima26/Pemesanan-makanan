@@ -59,6 +59,7 @@ $route['logout'] = 'auth/Login/logout';
 
 $route['regist'] = 'auth/register';
 $route['regist/process'] = 'auth/register/process';
+$route['regist/verify'] = 'auth/register/verify';
 
 $route['dashboard'] = 'admin/dashboard';
 $route['restaurant'] = 'admin/restaurant';

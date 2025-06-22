@@ -33,49 +33,76 @@ class Register extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', validation_errors());
-            redirect('auth/register');
+            redirect('regist');
         }
 
-        // Cek CAPTCHA
+        // Validasi CAPTCHA
         $captcha = $this->input->post('g-recaptcha-response');
         $secret = '6LfuZmkrAAAAAJkSOBgtA17pDBRCGlGF938rHX09';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query([
-            'secret' => $secret,
-            'response' => $captcha
-        ]));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $verify = curl_exec($ch);
-        curl_close($ch);
-        $response = json_decode($verify);
-
+        $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$captcha}");
         $response = json_decode($verify);
 
         if (!$response->success) {
             $this->session->set_flashdata('error', 'Captcha tidak valid');
-            redirect('auth/register');
+            redirect('regist');
         }
 
-        // Simpan user 
+        // Simpan user ke database
+        $verification_code = mt_rand(100000, 999999);
+
         $data = [
             'name' => $this->input->post('name'),
             'email' => $this->input->post('email'),
+            'phone' => $this->input->post('phone'),
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'role' => 'customer'
+            'role' => 'customer',
+            'verification_code' => $verification_code,
+            'is_verified' => 0
         ];
 
         $this->userModel->insert_user($data);
 
-        // Kirim email
-        $this->email->from('your_email@gmail.com', 'My App');
-        $this->email->to($data['email']);
-        $this->email->subject('Registrasi Berhasil');
-        $this->email->message('Selamat, Anda berhasil registrasi!');
-        $this->email->send();
+        // Ambil data user setelah disimpan
+        $user = $this->userModel->get_user_by_email($data['email']);
+        $this->session->set_userdata('verif_user_id', $user->id);
 
-        $this->session->set_flashdata('success', 'Registrasi berhasil, silakan login');
-        redirect('auth/login');
+        // Kirim kode verifikasi ke email
+        $this->email->from('your_email@gmail.com', 'My App');
+        $this->email->to($user->email);
+        $this->email->subject('Kode Verifikasi Akun');
+        $this->email->message("Kode verifikasi Anda adalah: <b>$verification_code</b>");
+
+        if (!$this->email->send()) {
+            $this->session->set_flashdata('error', 'Gagal mengirim kode verifikasi.');
+            redirect('regist');
+        }
+
+        // Arahkan ke form verifikasi
+        redirect('regist/verify');
+    }
+
+    public function verify()
+    {
+        if ($this->input->post()) {
+            $code = $this->input->post('otp');
+            $user_id = $this->session->userdata('verif_user_id');
+
+            $user = $this->userModel->get_by_id($user_id);
+
+            if ($user && $user->verification_code == $code) {
+                $this->userModel->update($user_id, [
+                    'is_verified' => 1,
+                    'verification_code' => null
+                ]);
+
+                $this->session->set_flashdata('success', 'Akun berhasil diverifikasi, silakan login.');
+                redirect('auth/login');
+            } else {
+                $this->session->set_flashdata('error', 'Kode verifikasi salah.');
+                redirect('regist/verify');
+            }
+        }
+
+        $this->load->view('auth/verify_form'); // form input kode
     }
 }
