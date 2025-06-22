@@ -53,11 +53,12 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['login'] = 'auth/login/index';      
+$route['login'] = 'auth/login';      
 $route['login/process'] = 'auth/login/process_login'; 
 $route['logout'] = 'auth/Login/logout';     
 
-$route['regist'] = 'auth/register/index';
+$route['regist'] = 'auth/register';
 $route['regist/process'] = 'auth/register/process';
 
 $route['dashboard'] = 'admin/dashboard';
+$route['restaurant'] = 'admin/restaurant';

@@ -94,7 +94,7 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
 
                     <p class="text-center">
                         <span>New on our platform?</span>
-                        <a href="<?= site_url('auth/register/index') ?>">
+                        <a href="<?= site_url('regist') ?>">
                             <span>Create an account</span>
                         </a>
                     </p>

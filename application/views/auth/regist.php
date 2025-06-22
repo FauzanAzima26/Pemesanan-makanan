@@ -51,7 +51,7 @@ $this->load->view('auth/template/header');
                         </div>
                     <?php endif; ?>
 
-                    <form id="formAuthentication" class="mb-6" action="<?= site_url('auth/register/process') ?>" method="POST">
+                    <form id="formAuthentication" class="mb-6" action="<?= site_url('regist/process') ?>" method="POST">
                         <div class="mb-6">
                             <label for="name" class="form-label">Username</label>
                             <input
