@@ -64,7 +64,7 @@ class Login extends CI_Controller
                 } elseif ($user->role == 'courier') {
                     redirect('courier/dashboard');
                 } else {
-                    redirect('admin/dashboard');
+                    redirect('customer/dashboard');
                 }
             } else {
                 $this->session->set_flashdata('error', 'Email/username atau password salah');

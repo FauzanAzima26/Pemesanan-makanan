@@ -30,8 +30,8 @@
         rel="stylesheet" />
 
     <link rel="stylesheet" href="<?= base_url('assets/vendor/fonts/tabler-icons.css'); ?>" />
-    <!-- <link rel="stylesheet" href="<?= base_url('assets/vendor/fonts/fontawesome.css'); ?>" /> -->
-    <!-- <link rel="stylesheet" href="<?= base_url('assets/vendor/fonts/flag-icons.css'); ?>" /> -->
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/fonts/fontawesome.css'); ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/fonts/flag-icons.css'); ?>" />
 
     <!-- Core CSS -->
 
@@ -56,4 +56,10 @@
 
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?= base_url('assets/js/config.js'); ?>"></script>
+
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css'); ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css'); ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css'); ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css'); ?>" />
+    <link rel="stylesheet" href="<?= base_url('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css'); ?>" />
 </head>

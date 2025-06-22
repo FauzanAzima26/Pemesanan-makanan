@@ -61,5 +61,8 @@ $route['regist'] = 'auth/register';
 $route['regist/process'] = 'auth/register/process';
 $route['regist/verify'] = 'auth/register/verify';
 
+// admin
 $route['dashboard'] = 'admin/dashboard';
+
 $route['restaurant'] = 'admin/restaurant';
+$route['restaurant/get_data'] = 'admin/restaurant/get_data';
