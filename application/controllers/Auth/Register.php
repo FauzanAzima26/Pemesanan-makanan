@@ -58,12 +58,12 @@ class Register extends CI_Controller
             redirect('auth/register');
         }
 
-        // Simpan user
+        // Simpan user 
         $data = [
             'name' => $this->input->post('name'),
             'email' => $this->input->post('email'),
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'role' => 'user'
+            'role' => 'customer'
         ];
 
         $this->userModel->insert_user($data);

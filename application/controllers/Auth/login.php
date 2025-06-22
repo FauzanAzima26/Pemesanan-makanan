@@ -53,14 +53,12 @@ class Login extends CI_Controller
 
                 $this->session->set_userdata($user_data);
 
-
-
                 if ($user->role == 'admin') {
                     redirect('admin/dashboard');
                 } elseif ($user->role == 'courier') {
-                    redirect('admin/dashboard/index');
+                    redirect('admin/dashboard');
                 } else {
-                    redirect('admin/dashboard/index');
+                    redirect('admin/dashboard');
                 }
             } else {
                 $this->session->set_flashdata('error', 'Email/username atau password salah');

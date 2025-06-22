@@ -60,4 +60,4 @@ $route['logout'] = 'auth/Login/logout';
 $route['regist'] = 'auth/register/index';
 $route['regist/process'] = 'auth/register/process';
 
-$route['dashboard'] = 'admin/dashboard/index';
+$route['dashboard'] = 'admin/dashboard';
