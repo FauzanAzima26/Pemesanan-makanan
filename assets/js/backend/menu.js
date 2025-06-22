@@ -1,9 +1,11 @@
+// File: assets/js/backend/menu.js
+
 $(document).ready(function () {
-	const tableElement = document.getElementById("restaurant-data");
+	const tableElement = document.getElementById("menu-data");
 	const getDataUrl = tableElement.dataset.getDataUrl;
 	const storeUrl = tableElement.dataset.storeUrl;
 
-	const table = $("#restaurant-table").DataTable({
+	const table = $("#menu-table").DataTable({
 		ajax: {
 			url: getDataUrl,
 			type: "GET",
@@ -11,48 +13,52 @@ $(document).ready(function () {
 		},
 		columns: [
 			{ data: "no" },
-			{ data: "owner" },
+			{ data: "restaurant_name" },
 			{ data: "name" },
-			{ data: "address" },
-			{ data: "status" },
+			{ data: "price" },
+			{ data: "description" },
+			{
+				data: "image",
+				render: function (data) {
+					return `<img src="${data}" width="60"/>`;
+				},
+			},
 			{
 				data: null,
 				orderable: false,
 				searchable: false,
 				render: function (data, type, row) {
 					return `
-					<button class="btn btn-icon btn-warning btn-sm edit" data-id="${row.id}" title="Edit">
-					<i class="ti ti-pencil"></i>
-					</button>
-					<button class="btn btn-icon btn-danger btn-sm delete" data-id="${row.id}" title="Delete">
-					<i class="ti ti-trash"></i>
-					</button>
-					<button class="btn btn-icon btn-primary btn-sm detail" data-id="${row.id}" title="Detail">
-					<i class="ti ti-eye"></i>
-					</button>
-				`;
+						<button class="btn btn-icon btn-warning btn-sm edit" data-id="${row.id}" title="Edit">
+							<i class="ti ti-pencil"></i>
+						</button>
+						<button class="btn btn-icon btn-danger btn-sm delete" data-id="${row.id}" title="Delete">
+							<i class="ti ti-trash"></i>
+						</button>`;
 				},
 			},
 		],
 	});
 
-	// Submit form (Add atau Update)
-	$("#restaurant-form").on("submit", function (e) {
+	// Submit form
+	$("#menu-form").on("submit", function (e) {
 		e.preventDefault();
-		const formData = $(this).serialize();
+		const form = $(this)[0];
+		const formData = new FormData(form);
 
 		$.ajax({
 			url: storeUrl,
 			type: "POST",
 			data: formData,
+			contentType: false,
+			processData: false,
 			dataType: "json",
 			success: function (response) {
 				if (response.success) {
 					Swal.fire("Berhasil", response.message, "success");
-					$("#restaurant-form")[0].reset();
+					form.reset();
 					bootstrap.Offcanvas.getInstance("#add-new-record").hide();
 					table.ajax.reload(null, false);
-					$(".data-submit").text("Submit");
 				} else {
 					Swal.fire("Gagal", response.message, "error");
 				}
@@ -63,26 +69,25 @@ $(document).ready(function () {
 		});
 	});
 
-	// Saat klik tombol Edit
+	// Edit
 	$(document).on("click", ".edit", function () {
 		const id = $(this).data("id");
 		const editUrl = getDataUrl.replace("get_data", "edit");
 
 		$.ajax({
-			url: `${editUrl}?id=${id}`, // <-- gunakan query string
+			url: `${editUrl}?id=${id}`,
 			type: "GET",
 			dataType: "json",
 			success: function (res) {
 				if (res && res.id) {
-					$("#id_restaurant").val(res.id);
-					$("#owner").val(res.owner);
+					$("#id_menu").val(res.id);
+					$("#restaurant_id").val(res.restaurant_id);
 					$("#name").val(res.name);
-					$("#address").val(res.address);
-					$("#status").val(res.status);
+					$("#price").val(res.price);
+					$("#description").val(res.description);
 
 					const offcanvas = new bootstrap.Offcanvas("#add-new-record");
 					offcanvas.show();
-					$(".data-submit").text("Update");
 				} else {
 					Swal.fire("Gagal", res.message || "Data tidak ditemukan", "error");
 				}
@@ -93,7 +98,7 @@ $(document).ready(function () {
 		});
 	});
 
-	// Saat klik tombol Delete
+	// Delete
 	$(document).on("click", ".delete", function () {
 		const id = $(this).data("id");
 
@@ -133,38 +138,28 @@ $(document).ready(function () {
 		});
 	});
 
-	$(document).on("click", ".detail", function () {
-		const id = $(this).data("id");
-		const detailUrl = getDataUrl.replace("get_data", "detail");
+	const menuData = document.getElementById("menu-data");
+	const restaurantUrl = menuData.dataset.restaurantUrl;
 
+	function loadRestaurants() {
 		$.ajax({
-			url: `${detailUrl}?id=${id}`,
+			url: restaurantUrl,
 			type: "GET",
 			dataType: "json",
-			success: function (response) {
-				if (response.success) {
-					let html = "";
-					response.data.forEach((menu, index) => {
-						html += `
-						<tr>
-							<td>${index + 1}</td>
-							<td>${menu.name}</td>
-							<td>${menu.price}</td>
-							<td>${menu.description}</td>
-							<td><img src="${menu.image}" width="60" /></td>
-						</tr>`;
-					});
-
-					$("#detail-menu-body").html(html);
-					const detailModal = new bootstrap.Modal("#detail-modal");
-					detailModal.show();
-				} else {
-					Swal.fire("Gagal", response.message, "error");
-				}
+			success: function (data) {
+				const select = $("#restaurant_id");
+				select.empty().append('<option value="">-- Pilih Restoran --</option>');
+				data.forEach((resto) => {
+					select.append(`<option value="${resto.id}">${resto.name}</option>`);
+				});
 			},
 			error: function () {
-				Swal.fire("Error", "Gagal mengambil data detail", "error");
+				console.error("Gagal memuat daftar restoran.");
 			},
 		});
+	}
+
+	$(document).ready(function () {
+		loadRestaurants();
 	});
 });

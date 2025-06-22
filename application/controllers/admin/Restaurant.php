@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Session $session
  * @property restaurantModel $restaurantModel
  * @property CI_Input $input
+ * @property menuModel $menuModel
  */
 class Restaurant extends CI_Controller
 {
@@ -38,24 +39,17 @@ class Restaurant extends CI_Controller
 
         foreach ($restaurants as $restaurant) {
             $row = [
+                'id' => $restaurant->id,
                 'no' => $no++,
                 'owner' => $restaurant->owner,
                 'name' => $restaurant->name,
                 'address' => $restaurant->address,
-                'status' => $restaurant->status,
-                'actions' => '
-                    <button class="btn btn-sm btn-warning edit" data-id="' . $restaurant->id . '">Edit</button>
-                    <button class="btn btn-sm btn-danger" data-id="' . $restaurant->id . '">Delete</button>
-                ',
+                'status' => $restaurant->status
             ];
             $data[] = $row;
         }
 
-        $output = [
-            "data" => $data // Tidak ada draw, recordsTotal, recordsFiltered karena bukan server-side
-        ];
-
-        echo json_encode($output);
+        echo json_encode(["data" => $data]);
     }
 
     public function store()
@@ -160,6 +154,34 @@ class Restaurant extends CI_Controller
             echo json_encode([
                 'success' => false,
                 'message' => 'Gagal menghapus data.'
+            ]);
+        }
+    }
+
+    public function detail()
+    {
+        $restaurant_id = $this->input->get('id');
+
+        if (!$restaurant_id || !is_numeric($restaurant_id)) {
+            echo json_encode([
+                'success' => false,
+                'message' => 'ID restoran tidak valid.'
+            ]);
+            return;
+        }
+
+        $this->load->model('menuModel');
+        $menus = $this->menuModel->get_by_restaurant_id($restaurant_id);
+
+        if ($menus) {
+            echo json_encode([
+                'success' => true,
+                'data' => $menus
+            ]);
+        } else {
+            echo json_encode([
+                'success' => false,
+                'message' => 'Tidak ada menu untuk restoran ini.'
             ]);
         }
     }

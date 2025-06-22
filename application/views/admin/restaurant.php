@@ -72,6 +72,34 @@
     </div>
 </div>
 
+<!-- detail -->
+<div class="modal fade" id="detail-modal" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel">Detail Menu Restaurant</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Menu</th>
+                            <th>Harga</th>
+                            <th>Deskripsi</th>
+                            <th>Gambar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detail-menu-body">
+                        <!-- Data akan dimasukkan melalui JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="<?= base_url('assets/vendor/libs/jquery/jquery.js'); ?>"></script>
 <script src="<?= base_url('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') ?>"></script>
 <script src="<?= base_url('assets/js/backend/restaurant.js') ?>"></script>
