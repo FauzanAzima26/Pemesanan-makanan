@@ -125,23 +125,31 @@
 		<div class="container">
 			<h4 class="text-center mb-4">Daftar Menu Restoran</h4>
 			<div class="row justify-content-center">
-				<div class="col-md-4 mb-4">
-					<a href="#" class="text-decoration-none text-dark">
-						<div class="card h-100 shadow-sm">
-							<img src="#" class="card-img-top" alt="image">
-							<div class="card-body">
-								<h6 class="card-subtitle text-muted mb-2">kkk</h6>
-								<h5 class="card-title">kkk</h5>
-								<p class="card-text">kkk</p>
-								<p class="fw-bold text-primary">kkk</p>
-							</div>
+
+				<?php if (!empty($menus)): ?>
+					<?php foreach ($menus as $menu): ?>
+						<div class="col-md-4 mb-4">
+							<a href="#" class="text-decoration-none text-dark">
+								<div class="card h-100 shadow-sm">
+									<img src="<?= base_url($menu->image ?: 'assets/img/no-image.png') ?>" class="card-img-top" alt="image">
+									<div class="card-body">
+										<h6 class="card-subtitle text-muted mb-2"><?= $menu->name ?></h6>
+										<h5 class="card-title"><?= $menu->name ?></h5>
+										<p class="card-text"><?= $menu->description ?></p>
+										<p class="fw-bold text-primary">Rp<?= number_format($menu->price, 0, ',', '.') ?></p>
+									</div>
+								</div>
+							</a>
 						</div>
-					</a>
-				</div>
-				<p class="text-center">Belum ada menu tersedia.</p>
+					<?php endforeach; ?>
+				<?php else: ?>
+					<p class="text-center">Belum ada menu tersedia.</p>
+				<?php endif; ?>
+
 			</div>
 		</div>
 	</section>
+
 
 	<!-- Footer -->
 	<footer class="landing-footer bg-body footer-text">

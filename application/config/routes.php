@@ -64,17 +64,6 @@ $route['regist/verify'] = 'auth/register/verify';
 // admin
 $route['dashboard'] = 'admin/dashboard';
 
-$route['restaurant'] = 'admin/restaurant';
-$route['restaurant/get_data'] = 'admin/restaurant/get_data';
-$route['restaurant/store'] = 'admin/restaurant/store';
-$route['restaurant/edit'] = 'admin/restaurant/edit';
-$route['restaurant/delete'] = 'admin/restaurant/delete';
-$route['restaurant/detail'] = 'admin/restaurant/detail';
-
 $route['menu'] = 'admin/menu';
 $route['menu/get_data'] = 'admin/menu/get_data';
 $route['menu/store'] = 'admin/menu/store';
-$route['menu/edit'] = 'admin/menu/edit';
-$route['menu/delete'] = 'admin/menu/delete';
-$route['menu/detail'] = 'admin/menu/detail';
-$route['menu/restaurant_list'] = 'admin/menu/restaurant_list';
