@@ -11,12 +11,10 @@ class Welcome extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper('url');
-		$this->load->model('menuModel');
 	}
 
 	public function index()
 	{
-		$data['menus'] = $this->menuModel->get_all(); // ambil data menu
-		$this->load->view('welcome_message', $data);
+		$this->load->view('welcome_message');
 	}
 }

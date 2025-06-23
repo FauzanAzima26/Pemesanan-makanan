@@ -125,25 +125,20 @@
 		<div class="container">
 			<h4 class="text-center mb-4">Daftar Menu Restoran</h4>
 			<div class="row justify-content-center">
-				<?php if (!empty($menus)): ?>
-					<?php foreach ($menus as $menu): ?>
-						<div class="col-md-4 mb-4">
-							<a href="<?= site_url('menu/detail/' . $menu->id) ?>" class="text-decoration-none text-dark">
-								<div class="card h-100 shadow-sm">
-									<img src="<?= base_url('uploads/menu/' . $menu->image) ?>" class="card-img-top" alt="<?= $menu->name ?>">
-									<div class="card-body">
-										<h6 class="card-subtitle text-muted mb-2"><?= $menu->restaurant_name ?></h6>
-										<h5 class="card-title"><?= $menu->name ?></h5>
-										<p class="card-text"><?= $menu->description ?></p>
-										<p class="fw-bold text-primary">Rp <?= number_format($menu->price, 0, ',', '.') ?></p>
-									</div>
-								</div>
-							</a>
+				<div class="col-md-4 mb-4">
+					<a href="#" class="text-decoration-none text-dark">
+						<div class="card h-100 shadow-sm">
+							<img src="#" class="card-img-top" alt="image">
+							<div class="card-body">
+								<h6 class="card-subtitle text-muted mb-2">kkk</h6>
+								<h5 class="card-title">kkk</h5>
+								<p class="card-text">kkk</p>
+								<p class="fw-bold text-primary">kkk</p>
+							</div>
 						</div>
-					<?php endforeach; ?>
-				<?php else: ?>
-					<p class="text-center">Belum ada menu tersedia.</p>
-				<?php endif; ?>
+					</a>
+				</div>
+				<p class="text-center">Belum ada menu tersedia.</p>
 			</div>
 		</div>
 	</section>
