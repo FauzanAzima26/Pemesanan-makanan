@@ -27,8 +27,7 @@ class Register extends CI_Controller
     public function process()
     {
         $this->form_validation->set_rules('name', 'Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('phone', 'Phone', 'required|numeric|min_length[10]|max_length[15]|is_unique[users.phone]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tb_users.email]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
 
         if ($this->form_validation->run() == FALSE) {
@@ -39,7 +38,25 @@ class Register extends CI_Controller
         // Validasi CAPTCHA
         $captcha = $this->input->post('g-recaptcha-response');
         $secret = '6LfuZmkrAAAAAJkSOBgtA17pDBRCGlGF938rHX09';
-        $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$captcha}");
+        $captcha = $this->input->post('g-recaptcha-response');
+        $secret = '6LfuZmkrAAAAAJkSOBgtA17pDBRCGlGF938rHX09';
+
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => http_build_query([
+                'secret' => $secret,
+                'response' => $captcha
+            ])
+        ]);
+
+        $verify = curl_exec($curl);
+        curl_close($curl);
+
+        $response = json_decode($verify);
+
         $response = json_decode($verify);
 
         if (!$response->success) {
@@ -53,7 +70,6 @@ class Register extends CI_Controller
         $data = [
             'name' => $this->input->post('name'),
             'email' => $this->input->post('email'),
-            'phone' => $this->input->post('phone'),
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
             'role' => 'customer',
             'verification_code' => $verification_code,
