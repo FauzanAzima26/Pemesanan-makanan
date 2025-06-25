@@ -66,10 +66,6 @@ $this->load->view('auth/template/header');
                             <label for="email" class="form-label">Email</label>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" />
                         </div>
-                        <div class="mb-6">
-                            <label for="phone" class="form-label">Phone</label>
-                            <input type="number" class="form-control" id="phone" name="phone" placeholder="Enter your phone" />
-                        </div>
                         <div class="mb-6 form-password-toggle">
                             <label class="form-label" for="password">Password</label>
                             <div class="input-group input-group-merge">

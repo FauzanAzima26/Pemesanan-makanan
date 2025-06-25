@@ -88,15 +88,64 @@
 						</li>
 					</ul>
 
-					<!-- Login Button -->
 					<ul class="navbar-nav flex-row align-items-center ms-auto">
-						<li>
-							<a href="<?= site_url('auth/login') ?>" class="btn btn-primary" target="_blank">
-								<span class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span>
-								<span class="d-none d-md-block">Login/Register</span>
-							</a>
-						</li>
+						<?php if ($this->session->userdata('logged_in')): ?>
+							<!-- Avatar Dropdown -->
+							<li class="nav-item navbar-dropdown dropdown-user dropdown">
+								<a class="nav-link dropdown-toggle hide-arrow p-0" href="#" data-bs-toggle="dropdown">
+									<div class="avatar avatar-online">
+										<img src="<?= base_url('assets/img/avatars/1.png') ?>" alt class="rounded-circle" />
+									</div>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-end">
+									<li>
+										<a class="dropdown-item mt-0" href="#">
+											<div class="d-flex align-items-center">
+												<div class="flex-shrink-0 me-2">
+													<div class="avatar avatar-online">
+														<img src="<?= base_url('assets/img/avatars/1.png') ?>" alt class="rounded-circle" />
+													</div>
+												</div>
+												<div class="flex-grow-1">
+													<h6 class="mb-0"><?= $this->session->userdata('nama') ?></h6>
+													<small class="text-muted"><?= $this->session->userdata('role') ?></small>
+												</div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<div class="dropdown-divider my-1 mx-n2"></div>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#"><i class="ti ti-user me-3 ti-md"></i> My Profile</a>
+									</li>
+									<li>
+										<a class="dropdown-item" href="#"><i class="ti ti-settings me-3 ti-md"></i> Settings</a>
+									</li>
+									<li>
+										<div class="dropdown-divider my-1 mx-n2"></div>
+									</li>
+									<li>
+										<div class="d-grid px-2 pt-2 pb-1">
+											<a class="btn btn-sm btn-danger d-flex" href="<?= site_url('logout') ?>">
+												<small class="align-middle">Logout</small>
+												<i class="ti ti-logout ms-2 ti-14px"></i>
+											</a>
+										</div>
+									</li>
+								</ul>
+							</li>
+						<?php else: ?>
+							<!-- Login Button -->
+							<li>
+								<a href="<?= site_url('login') ?>" class="btn btn-primary">
+									<span class="tf-icons ti ti-login scaleX-n1-rtl me-md-1"></span>
+									<span class="d-none d-md-block">Login/Register</span>
+								</a>
+							</li>
+						<?php endif; ?>
 					</ul>
+
 				</div>
 			</div>
 		</div>
