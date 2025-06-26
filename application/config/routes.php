@@ -67,3 +67,7 @@ $route['dashboard'] = 'admin/dashboard';
 $route['menu'] = 'admin/menu';
 $route['menu/get_data'] = 'admin/menu/get_data';
 $route['menu/store'] = 'admin/menu/store';
+
+// customer
+$route['order'] = 'customer/order';
+$route['order/create'] = 'customer/order/create';

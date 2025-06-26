@@ -5,8 +5,6 @@
                 <a
                   href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation//layouts.html"
                   target="_blank"
-                  class="fw-medium"
-                  >Layout docs</a
-                >.
+                  class="fw-medium">Layout docs</a>.
               </p>
             </div>

@@ -174,27 +174,36 @@
 		<div class="container">
 			<h4 class="text-center mb-4">Daftar Menu Restoran</h4>
 			<div class="row justify-content-center">
-
 				<?php if (!empty($menus)): ?>
 					<?php foreach ($menus as $menu): ?>
-						<div class="col-md-4 mb-4">
-							<a href="#" class="text-decoration-none text-dark">
-								<div class="card h-100 shadow-sm">
-									<img src="<?= base_url($menu->image ?: 'assets/img/no-image.png') ?>" class="card-img-top" alt="image">
-									<div class="card-body">
-										<h6 class="card-subtitle text-muted mb-2"><?= $menu->name ?></h6>
-										<h5 class="card-title"><?= $menu->name ?></h5>
-										<p class="card-text"><?= $menu->description ?></p>
-										<p class="fw-bold text-primary">Rp<?= number_format($menu->price, 0, ',', '.') ?></p>
-									</div>
+						<div class="col-md-6 mt-8 col-lg-4">
+							<div class="card">
+								<img class="card-img-top" src="<?= base_url($menu->image ?: 'assets/img/no-image.png') ?>" alt="Card image cap" />
+								<div class="card-body">
+									<h5 class="card-title"><?= $menu->name ?></h5>
+									<p class="card-text"><?= $menu->description ?></p>
 								</div>
-							</a>
+								<ul class="list-group list-group-flush">
+									<li class="list-group-item">Rp<?= number_format($menu->price, 0, ',', '.') ?></li>
+								</ul>
+								<div class="card-body">
+									<?php if ($this->session->userdata('logged_in')): ?>
+										<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#pesanModal<?= $menu->id ?>">
+											Pesan
+										</button>
+									<?php else: ?>
+										<a href="<?= base_url('auth/login') ?>" class="btn btn-sm btn-primary">
+											Login untuk Pesan
+										</a>
+									<?php endif; ?>
+								</div>
+							</div>
 						</div>
+						<?php $this->load->view('customer/order', ['menu' => $menu]) ?>
 					<?php endforeach; ?>
 				<?php else: ?>
 					<p class="text-center">Belum ada menu tersedia.</p>
 				<?php endif; ?>
-
 			</div>
 		</div>
 	</section>

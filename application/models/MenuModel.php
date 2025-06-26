@@ -31,4 +31,9 @@ class MenuModel extends CI_Model
     {
         return $this->db->get($this->table)->result(); // ambil semua data
     }
+
+    public function getMenuById($id)
+    {
+        return $this->db->get_where('tb_menu', ['id' => $id])->row();
+    }
 }
