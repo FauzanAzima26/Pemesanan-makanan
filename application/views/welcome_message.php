@@ -188,9 +188,9 @@
 								</ul>
 								<div class="card-body">
 									<?php if ($this->session->userdata('logged_in')): ?>
-										<button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#pesanModal<?= $menu->id ?>">
-											Pesan
-										</button>
+										<a href="<?= site_url('customer/cart/store/' . $menu->id) ?>" class="btn btn-sm btn-primary">
+											Tambah Keranjang
+										</a>
 									<?php else: ?>
 										<a href="<?= base_url('auth/login') ?>" class="btn btn-sm btn-primary">
 											Login untuk Pesan
@@ -199,7 +199,6 @@
 								</div>
 							</div>
 						</div>
-						<?php $this->load->view('customer/order', ['menu' => $menu]) ?>
 					<?php endforeach; ?>
 				<?php else: ?>
 					<p class="text-center">Belum ada menu tersedia.</p>
