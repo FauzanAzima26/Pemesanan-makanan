@@ -36,10 +36,34 @@ class Login extends CI_Controller
             $this->session->set_flashdata('error', validation_errors());
             redirect('login');
         } else {
+            // === Validasi reCAPTCHA ===
+            $captcha = $this->input->post('g-recaptcha-response');
+            $secret = '6Lc6AW4rAAAAAHRQafpnyZgSvoEPK5aFzQ7v8E5y';
+
+            $curl = curl_init();
+            curl_setopt_array($curl, [
+                CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POST => true,
+                CURLOPT_POSTFIELDS => http_build_query([
+                    'secret' => $secret,
+                    'response' => $captcha
+                ])
+            ]);
+            $verify = curl_exec($curl);
+            curl_close($curl);
+
+            $response = json_decode($verify);
+
+            if (!$response || !$response->success) {
+                $this->session->set_flashdata('error', 'Captcha tidak valid.');
+                redirect('login');
+            }
+            // ===========================
+
             $email = $this->input->post('email-username');
             $password = $this->input->post('password');
 
-            // Ambil user berdasarkan email saja (tanpa cek password dulu)
             $user = $this->userModel->get_user_by_email($email);
 
             if ($user && password_verify($password, $user->password)) {
@@ -58,7 +82,6 @@ class Login extends CI_Controller
 
                 $this->session->set_userdata($user_data);
 
-                // Redirect sesuai role
                 if ($user->role == 'admin') {
                     redirect('admin/dashboard');
                 } elseif ($user->role == 'courier') {

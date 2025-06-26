@@ -10,7 +10,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
  */
 class Register extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -32,35 +31,6 @@ class Register extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
             $this->session->set_flashdata('error', validation_errors());
-            redirect('regist');
-        }
-
-        // Validasi CAPTCHA
-        $captcha = $this->input->post('g-recaptcha-response');
-        $secret = '6LfuZmkrAAAAAJkSOBgtA17pDBRCGlGF938rHX09';
-        $captcha = $this->input->post('g-recaptcha-response');
-        $secret = '6LfuZmkrAAAAAJkSOBgtA17pDBRCGlGF938rHX09';
-
-        $curl = curl_init();
-        curl_setopt_array($curl, [
-            CURLOPT_URL => 'https://www.google.com/recaptcha/api/siteverify',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => http_build_query([
-                'secret' => $secret,
-                'response' => $captcha
-            ])
-        ]);
-
-        $verify = curl_exec($curl);
-        curl_close($curl);
-
-        $response = json_decode($verify);
-
-        $response = json_decode($verify);
-
-        if (!$response->success) {
-            $this->session->set_flashdata('error', 'Captcha tidak valid');
             redirect('regist');
         }
 
@@ -93,7 +63,6 @@ class Register extends CI_Controller
             redirect('regist');
         }
 
-        // Arahkan ke form verifikasi
         redirect('regist/verify');
     }
 
@@ -119,6 +88,6 @@ class Register extends CI_Controller
             }
         }
 
-        $this->load->view('auth/verify_form'); // form input kode
+        $this->load->view('auth/verify_form');
     }
 }

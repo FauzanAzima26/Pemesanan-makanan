@@ -88,7 +88,8 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
                             </div>
                         </div>
                         <div class="mb-6">
-                            <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
+                            <div class="g-recaptcha" data-sitekey="6Lc6AW4rAAAAADnsd0a0MUjN8SydlxAQcxPJtYq1"></div>
+                            <button class="btn btn-primary mt-8 d-grid w-100" type="submit">Login</button>
                         </div>
                     </form>
 
@@ -128,6 +129,8 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
 </div>
 
 <!-- / Content -->
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <?php
 // Load footer

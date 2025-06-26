@@ -89,14 +89,12 @@ $this->load->view('auth/template/header');
                                 </label>
                             </div>
                         </div>
-                        <!-- reCAPTCHA -->
-                        <div class="g-recaptcha" data-sitekey="6LfuZmkrAAAAAJ-iARaPaqlL6BdrF3n3sG6Yn3yY"></div>
-                        <button class="btn btn-primary mt-8 d-grid w-100">Sign up</button>
+                        <button class="btn btn-primary d-grid w-100">Sign up</button>
                     </form>
 
                     <p class="text-center">
                         <span>Already have an account?</span>
-                        <a href="auth-login-basic.html">
+                        <a href="<?= site_url('login') ?>">
                             <span>Sign in instead</span>
                         </a>
                     </p>
@@ -130,8 +128,6 @@ $this->load->view('auth/template/header');
 </div>
 
 <!-- / Content -->
-
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <?php
 $this->load->view('auth/template/footer');
