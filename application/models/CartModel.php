@@ -5,7 +5,7 @@ class CartModel extends CI_Model
 {
     public function getCartItems($user_id)
     {
-        $this->db->select('tb_cart.*, tb_menu.name, tb_menu.price');
+        $this->db->select('tb_cart.id as cart_id, tb_cart.*, tb_menu.name, tb_menu.price, tb_menu.image');
         $this->db->from('tb_cart');
         $this->db->join('tb_menu', 'tb_cart.menu_id = tb_menu.id');
         $this->db->where('tb_cart.user_id', $user_id);
@@ -36,5 +36,10 @@ class CartModel extends CI_Model
     {
         $this->db->where('user_id', $user_id);
         $this->db->delete('tb_cart');
+    }
+
+    public function updateQty($cart_id, $qty)
+    {
+        return $this->db->update('tb_cart', ['qty' => $qty], ['id' => $cart_id]);
     }
 }

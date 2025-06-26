@@ -22,8 +22,19 @@ class Cart extends CI_Controller
 
     public function index()
     {
+        $user_id = $this->session->userdata('id');
+        $items = $this->CartModel->getCartItems($user_id);
+
+        // Hitung total
+        $total = 0;
+        foreach ($items as $item) {
+            $total += $item->price * $item->qty;
+        }
+
+        $data['items'] = $items;
+        $data['total'] = $total;
         $data['title'] = 'Cart';
-        $data['content'] = 'customer/cart'; // halaman utama yang akan disisipkan
+        $data['content'] = 'customer/cart';
         $this->load->view('customer/layout/header', $data);
         $this->load->view('customer/layout/main', $data);
     }
@@ -49,40 +60,31 @@ class Cart extends CI_Controller
     }
 
 
-    public function checkout()
+    public function updateQty()
     {
-        $cart = $this->session->userdata('cart');
+        log_message('debug', '🔧 Memasuki updateQty() controller');
+
+        $cart_id = $this->input->post('cart_id');
+        $qty = (int) $this->input->post('qty');
+
+        if ($cart_id && $qty > 0) {
+            $this->CartModel->updateQty($cart_id, $qty);
+            echo json_encode(['status' => 'success']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Invalid input']);
+        }
+    }
+
+    public function getCartTotal()
+    {
         $user_id = $this->session->userdata('id');
-        $payment = $this->input->post('payment_method');
+        $items = $this->CartModel->getCartItems($user_id);
 
-        if (!$cart || !$user_id) {
-            redirect('auth/login');
+        $total = 0;
+        foreach ($items as $item) {
+            $total += $item->price * $item->qty;
         }
 
-        $total = array_sum(array_column($cart, 'subtotal'));
-
-        $order_data = [
-            'user_id' => $user_id,
-            'total' => $total,
-            'status' => 'processing',
-            'kode_verifikasi' => random_string('alnum', 8),
-            'payment_method' => $payment,
-            'created_at' => date('Y-m-d H:i:s')
-        ];
-        $order_id = $this->OrderModel->insertOrder($order_data);
-
-        foreach ($cart as $item) {
-            $this->OrderModel->insertOrderItem([
-                'order_id' => $order_id,
-                'menu_id' => $item['menu_id'],
-                'qty' => $item['qty'],
-                'price' => $item['price'],
-                'subtotal' => $item['subtotal']
-            ]);
-        }
-
-        $this->session->unset_userdata('cart');
-        $this->session->set_flashdata('success', 'Pesanan berhasil dibuat.');
-        redirect('customer/cart');
+        echo json_encode(['total' => $total]);
     }
 }

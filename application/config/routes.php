@@ -71,3 +71,5 @@ $route['menu/store'] = 'admin/menu/store';
 // customer
 $route['cart'] = 'customer/cart';
 $route['cart/store'] = 'customer/cart/store';
+$route['cart/update'] = 'customer/cart/updateQty'; 
+
