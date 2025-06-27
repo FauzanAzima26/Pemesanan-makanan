@@ -7,6 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property MenuModel $MenuModel
  * @property OrderModel $OrderModel
  * @property CartModel $CartModel
+ * @property CI_DB $db
  */
 
 class Cart extends CI_Controller
@@ -86,5 +87,19 @@ class Cart extends CI_Controller
         }
 
         echo json_encode(['total' => $total]);
+    }
+
+    public function remove()
+    {
+        $cart_id = $this->input->post('cart_id');
+        $user_id = $this->session->userdata('id');
+
+        $this->db->where('id', $cart_id);
+        $this->db->where('user_id', $user_id);
+        $deleted = $this->db->delete('tb_cart');
+
+        echo json_encode([
+            'status' => $deleted ? 'success' : 'error'
+        ]);
     }
 }

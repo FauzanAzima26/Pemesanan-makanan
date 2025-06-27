@@ -35,7 +35,10 @@
                                                      </div>
                                                  </div>
                                                  <form action="<?= site_url('cart/remove/' . $item->cart_id) ?>" method="post">
-                                                     <button type="submit" class="btn btn-sm btn-outline-danger" aria-label="Remove">
+                                                     <button type="button"
+                                                         class="btn btn-sm btn-outline-danger btn-remove-item"
+                                                         data-id="<?= $item->cart_id ?>"
+                                                         data-url="<?= site_url('customer/cart/remove') ?>">
                                                          <i class="ti ti-x"></i>
                                                      </button>
                                                  </form>

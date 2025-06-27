@@ -71,8 +71,8 @@
 						<i class="ti ti-x ti-lg"></i>
 					</button>
 					<ul class="navbar-nav me-auto">
-						<li class="nav-item">
-							<a class="nav-link fw-medium" aria-current="page" href="#landingHero">Home</a>
+						<li class="nav-item <?= ($this->router->fetch_class() == 'welcome') ? 'active' : '' ?>">
+							<a class="nav-link fw-medium" aria-current="page" href="<?= site_url('welcome') ?>">Home</a>
 						</li>
 						<li class="nav-item">
 							<?php if ($this->session->userdata('logged_in')): ?>
@@ -80,15 +80,6 @@
 							<?php else: ?>
 								<a class="nav-link fw-medium" href="<?= site_url('login') ?>">Cart</a>
 							<?php endif; ?>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link fw-medium" href="#landingTeam">Team</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link fw-medium" href="#landingFAQ">FAQ</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link fw-medium" href="#landingContact">Contact us</a>
 						</li>
 					</ul>
 

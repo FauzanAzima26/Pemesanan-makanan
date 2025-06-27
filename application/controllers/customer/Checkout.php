@@ -93,7 +93,7 @@ class Checkout extends CI_Controller
         $transaction_status = $result->transaction_status ?? null;
         $payment_type = $result->payment_type ?? null;
 
-        // Status mapping
+        // Mapping status
         if ($transaction_status === 'settlement') {
             $status_order = 'paid';
         } elseif ($transaction_status === 'pending') {
@@ -102,12 +102,37 @@ class Checkout extends CI_Controller
             $status_order = 'cancelled';
         }
 
-        // Update order
+        // Update tb_orders
         $this->db->where('id', $order_id);
         $this->db->update('tb_orders', [
             'status' => $status_order,
             'payment_method' => $payment_type
         ]);
+
+        // Lanjut jika pembayaran sukses
+        if ($status_order === 'paid') {
+            // Ambil data order
+            $order = $this->db->get_where('tb_orders', ['id' => $order_id])->row();
+            if ($order) {
+                $user_id = $order->user_id;
+
+                // Ambil item dari cart
+                $cartItems = $this->db->get_where('tb_cart', ['user_id' => $user_id])->result();
+
+                foreach ($cartItems as $item) {
+                    // Ambil harga dari tb_menu
+                    $menu = $this->db->get_where('tb_menu', ['id' => $item->menu_id])->row();
+                    if (!$menu) continue; // skip jika menu tidak ditemukan
+
+                    $this->db->insert('tb_order_items', [
+                        'order_id' => $order_id,
+                        'menu_id'  => $item->menu_id,
+                        'qty'      => $item->qty,
+                        'subtotal' => $item->qty * $menu->price
+                    ]);
+                }
+            }
+        }
 
         echo 'OK';
     }
