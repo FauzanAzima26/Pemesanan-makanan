@@ -111,13 +111,6 @@ $system_path = 'system';
  *
  * NO TRAILING SLASH!
  */
-if (file_exists(__DIR__ . '/.env')) {
-	$env = parse_ini_file(__DIR__ . '/.env', false, INI_SCANNER_TYPED);
-	foreach ($env as $key => $value) {
-		putenv("$key=$value");
-	}
-}
-
 $application_folder = 'application';
 
 /*
