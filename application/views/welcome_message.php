@@ -75,7 +75,11 @@
 							<a class="nav-link fw-medium" aria-current="page" href="#landingHero">Home</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link fw-medium" href="<?= site_url('cart') ?>">Cart</a>
+							<?php if ($this->session->userdata('logged_in')): ?>
+								<a class="nav-link fw-medium" href="<?= site_url('cart') ?>">Cart</a>
+							<?php else: ?>
+								<a class="nav-link fw-medium" href="<?= site_url('login') ?>">Cart</a>
+							<?php endif; ?>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link fw-medium" href="#landingTeam">Team</a>

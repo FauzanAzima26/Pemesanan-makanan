@@ -52,6 +52,12 @@
                         <div data-i18n="Page 2">Menu</div>
                     </a>
                 </li>
+                <li class="menu-item <?= ($this->router->fetch_class() == 'order') ? 'active' : '' ?>">
+                    <a href="<?= site_url('order') ?>" class="menu-link">
+                        <i class="menu-icon tf-icons ti ti-app-window"></i>
+                        <div data-i18n="Page 2">Pesanan</div>
+                    </a>
+                </li>
                 <li class="menu-item">
                     <a href="<?= site_url('logout') ?>" class="menu-link">
                         <i class="menu-icon tf-icons ti ti-app-window"></i>

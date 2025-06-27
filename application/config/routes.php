@@ -68,8 +68,13 @@ $route['menu'] = 'admin/menu';
 $route['menu/get_data'] = 'admin/menu/get_data';
 $route['menu/store'] = 'admin/menu/store';
 
+$route['order'] = 'admin/pesanan';
+$route['order/get_data'] = 'admin/pesanan/get_data';
+$route['customer/checkout/callback'] = 'customer/checkout/callback';
+
 // customer
 $route['cart'] = 'customer/cart';
 $route['cart/store'] = 'customer/cart/store';
-$route['cart/update'] = 'customer/cart/updateQty'; 
+$route['cart/update'] = 'customer/cart/updateQty';
+
 

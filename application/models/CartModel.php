@@ -42,4 +42,16 @@ class CartModel extends CI_Model
     {
         return $this->db->update('tb_cart', ['qty' => $qty], ['id' => $cart_id]);
     }
+
+    public function getTotal($user_id)
+    {
+        $this->db->select('SUM(COALESCE(tb_menu.price, 0) * tb_cart.qty) AS total');
+        $this->db->from('tb_cart');
+        $this->db->join('tb_menu', 'tb_menu.id = tb_cart.menu_id');
+        $this->db->where('tb_cart.user_id', $user_id);
+
+        $query = $this->db->get();
+        $row = $query->row();
+        return $row ? $row->total : 0;
+    }
 }
