@@ -66,6 +66,9 @@
               <li class="nav-item <?= ($this->router->fetch_class() == 'cart') ? 'active' : '' ?>">
                 <a class="nav-link fw-medium" href="<?= site_url('cart') ?>">Cart</a>
               </li>
+              <li class="nav-item <?= ($this->router->fetch_class() == 'detail_pesanan') ? 'active' : '' ?>">
+                <a class="nav-link fw-medium" href="<?= site_url('detail_pesanan') ?>">Pesanan saya</a>
+              </li>
             </ul>
           </div>
           <div class="landing-menu-overlay d-lg-none"></div>

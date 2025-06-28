@@ -22,4 +22,9 @@ class OrderModel extends CI_Model
     {
         return $this->db->get_where($this->table, ['id' => $id])->row();
     }
+
+    public function get_by_user($user_id)
+    {
+        return $this->db->get_where('tb_orders', ['user_id' => $user_id])->result();
+    }
 }

@@ -77,4 +77,7 @@ $route['cart'] = 'customer/cart';
 $route['cart/store'] = 'customer/cart/store';
 $route['cart/update'] = 'customer/cart/updateQty';
 
+$route['detail_pesanan'] = 'customer/detail_pesanan';
+$route['detail_pesanan/get_data'] = 'customer/detail_pesanan/get_data';
+
 

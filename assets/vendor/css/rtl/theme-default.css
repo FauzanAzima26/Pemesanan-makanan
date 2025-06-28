@@ -80,6 +80,10 @@ body {
 }
 
 .bg-body {
+  background: #f8f7fa !important;
+}
+
+.footer {
   background: #282c3e !important;
 }
 

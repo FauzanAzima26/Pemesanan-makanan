@@ -81,8 +81,8 @@
 								<a class="nav-link fw-medium" href="<?= site_url('login') ?>">Cart</a>
 							<?php endif; ?>
 						</li>
-						<li class="nav-item <?= ($this->router->fetch_class() == 'welcome') ? 'active' : '' ?>">
-							<a class="nav-link fw-medium" aria-current="page" href="<?= site_url('welcome') ?>">pesanan</a>
+						<li class="nav-item <?= ($this->router->fetch_class() == 'detail_pesanan') ? 'active' : '' ?>">
+							<a class="nav-link fw-medium" aria-current="page" href="<?= site_url('detail_pesanan') ?>">Pesanan saya</a>
 						</li>
 					</ul>
 
@@ -207,7 +207,7 @@
 
 
 	<!-- Footer -->
-	<footer class="landing-footer bg-body footer-text">
+	<footer class="landing-footer footer footer-text">
 		<div class="container">
 			<div class="row gx-0 gy-6 g-lg-10">
 				<div class="col-lg-5">
