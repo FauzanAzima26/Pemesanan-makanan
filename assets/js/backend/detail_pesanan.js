@@ -24,5 +24,11 @@ const table = $(".detail_pesanan").DataTable({
         },
         { data: "total" },
         { data: "payment" },
+        {
+			data: null,
+			render: (data, type, row) => `
+                <button class="btn btn-sm btn-primary detail" data-id="${row.id}">Detail</button>
+            `,
+		},
     ]
 });

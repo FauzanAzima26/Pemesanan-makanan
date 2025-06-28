@@ -17,6 +17,7 @@
                                 <th>Status</th>
                                 <th>Total</th>
                                 <th>Metode pembayaran</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
