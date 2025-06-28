@@ -1,15 +1,17 @@
-<div class="col-md-6 col-lg-4">
-    <h6 class="mt-2 text-muted">Images</h6>
-    <div class="card">
-        <img src="<?= base_url('assets/qrcode/' . $order->id . '.png') ?>" width="200" alt="QR Verifikasi">
-        <div class="card-body">
-            <p class="card-text">
-                Some quick example text to build on the card title and make up the bulk of the card's content.
-            </p>
-            <p class="card-text">
-                Cookie topping caramels jujubes gingerbread. Lollipop apple pie cupcake candy canes cookie ice
-                cream. Wafer chocolate bar carrot cake jelly-o.
-            </p>
-        </div>
+<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="qrModalLabel">Detail Pesanan</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="qrModalBody">
+        <p>Memuat data pesanan...</p>
+      </div>
     </div>
+  </div>
 </div>
+
+<script src="<?= base_url('assets/vendor/libs/jquery/jquery.js') ?>"></script>
+<script src="<?= base_url('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') ?>"></script>
+<script src="<?= base_url('assets/js/backend/detail_pesanan.js') ?>"></script>

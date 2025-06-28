@@ -29,6 +29,8 @@
     </div>
 </section>
 
+<?php $this->load->view('customer/qr') ?>
+
 <!--/ DataTable with Buttons -->
 <script src="<?= base_url('assets/vendor/libs/jquery/jquery.js') ?>"></script>
 <script src="<?= base_url('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') ?>"></script>

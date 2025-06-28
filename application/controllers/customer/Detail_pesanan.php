@@ -47,6 +47,7 @@ class Detail_pesanan extends CI_Controller
                 $menu = $this->MenuModel->get_by_id($item->menu_id);
 
                 $result[] = [
+                    'id' => $order->id,
                     'menu' => $menu ? $menu->name : 'Tidak diketahui',
                     'status' => $order->status,
                     'total' => number_format($order->total, 0, ',', '.'),
