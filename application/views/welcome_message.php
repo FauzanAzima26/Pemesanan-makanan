@@ -81,6 +81,9 @@
 								<a class="nav-link fw-medium" href="<?= site_url('login') ?>">Cart</a>
 							<?php endif; ?>
 						</li>
+						<li class="nav-item <?= ($this->router->fetch_class() == 'welcome') ? 'active' : '' ?>">
+							<a class="nav-link fw-medium" aria-current="page" href="<?= site_url('welcome') ?>">pesanan</a>
+						</li>
 					</ul>
 
 					<ul class="navbar-nav flex-row align-items-center ms-auto">
