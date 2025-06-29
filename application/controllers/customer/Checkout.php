@@ -58,7 +58,6 @@ class Checkout extends CI_Controller
             'id' => $order_id, // pastikan 'id' adalah primary key
             'user_id' => $user_id,
             'status' => 'pending',
-            'kode_verifikasi' => strtoupper(random_string('alnum', 6)),
             'total' => $total,
             'payment_method' => null
         ]);
