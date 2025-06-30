@@ -29,7 +29,7 @@ class MenuModel extends CI_Model
 
     public function get_all()
     {
-        return $this->db->get($this->table)->result(); // ambil semua data
+        return $this->db->where('status', 'aktif')->get('tb_menu')->result();
     }
 
     public function getMenuById($id)

@@ -20,11 +20,22 @@ const table = $(".menuu").DataTable({
 				data ? `<img src="${base_url + data}" width="50">` : "-",
 		},
 		{
+			data: "status",
+			render: (data) =>
+				`<span class="badge bg-${
+					data === "aktif" ? "success" : "secondary"
+				}">${data}</span>`,
+		},
+		{
 			data: null,
 			render: (data, type, row) => `
-                <button class="btn btn-sm btn-warning edit" data-id="${row.id}">Edit</button>
-                <button class="btn btn-sm btn-danger delete" data-id="${row.id}">Delete</button>
-            `,
+    <button class="btn btn-sm btn-warning edit" data-id="${row.id}" title="Edit">
+        <i class="ti ti-pencil"></i>
+    </button>
+    <button class="btn btn-sm btn-secondary toggle-status" data-id="${row.id}" title="Aktif/Nonaktif">
+        <i class="ti ti-refresh"></i>
+    </button>
+`,
 		},
 	],
 });
@@ -105,6 +116,64 @@ $(document).on("click", ".edit", function () {
 		},
 		error: function () {
 			Swal.fire("Error", "Gagal mengambil data", "error");
+		},
+	});
+});
+
+// Event klik tombol Delete
+$(document).on("click", ".delete", function () {
+	const id = $(this).data("id");
+
+	Swal.fire({
+		title: "Apakah Anda yakin?",
+		text: "Data yang dihapus tidak bisa dikembalikan!",
+		icon: "warning",
+		showCancelButton: true,
+		confirmButtonColor: "#d33",
+		cancelButtonColor: "#3085d6",
+		confirmButtonText: "Ya, hapus!",
+		cancelButtonText: "Batal",
+	}).then((result) => {
+		if (result.isConfirmed) {
+			$.ajax({
+				url: base_url + "admin/menu/delete",
+				type: "POST",
+				data: { id: id },
+				dataType: "json",
+				success: function (response) {
+					if (response.success) {
+						Swal.fire("Terhapus!", response.message, "success");
+						table.ajax.reload(null, false);
+					} else {
+						Swal.fire("Gagal", response.message, "error");
+					}
+				},
+				error: function () {
+					Swal.fire("Error", "Terjadi kesalahan saat menghapus data", "error");
+				},
+			});
+		}
+	});
+});
+
+$(document).on("click", ".toggle-status", function () {
+	const id = $(this).data("id");
+
+	$.ajax({
+		url: base_url + "admin/menu/toggle_status",
+		type: "POST",
+		data: { id: id },
+		dataType: "json",
+		success: function (response) {
+			if (response.success) {
+				Swal.fire("Berhasil", response.message, "success");
+				table.ajax.reload(null, false);
+			} else {
+				Swal.fire("Gagal", response.message, "error");
+			}
+		},
+		error: function () {
+			Swal.fire("Error", "Gagal mengubah status menu", "error");
 		},
 	});
 });

@@ -38,12 +38,14 @@ class Menu extends CI_Controller
             $menu = $this->MenuModel->get_by_id($id);
 
             if ($menu) {
+                // Tambah di bagian respons menu (untuk edit)
                 echo json_encode([
                     'id_menu' => $menu->id,
                     'name' => $menu->name,
                     'price' => $menu->price,
                     'description' => $menu->description,
-                    'image' => $menu->image
+                    'image' => $menu->image,
+                    'status' => $menu->status // tambahkan ini
                 ]);
             } else {
                 echo json_encode([
@@ -108,5 +110,25 @@ class Menu extends CI_Controller
         }
 
         echo json_encode(['success' => true, 'message' => $message]);
+    }
+
+    public function toggle_status()
+    {
+        $id = $this->input->post('id');
+        $menu = $this->MenuModel->get_by_id($id);
+
+        if (!$menu) {
+            echo json_encode(['success' => false, 'message' => 'Data menu tidak ditemukan.']);
+            return;
+        }
+
+        $new_status = $menu->status === 'aktif' ? 'nonaktif' : 'aktif';
+
+        $this->db->where('id', $id)->update('tb_menu', ['status' => $new_status]);
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Status menu diubah menjadi ' . $new_status . '.'
+        ]);
     }
 }

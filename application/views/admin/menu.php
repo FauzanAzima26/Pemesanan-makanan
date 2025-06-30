@@ -1,5 +1,6 @@
 <div id="menu-form" data-store-url="<?= site_url('menu/store') ?>"
     data-get-data-url="<?= site_url('menu/get_data') ?>"
+    data-delete-url="<?= base_url('admin/menu/delete') ?>"
     data-base-url="<?= base_url() ?>">
 </div>
 
@@ -20,7 +21,8 @@
                         <th>Harga</th>
                         <th>Keterangan</th>
                         <th>Gambar</th>
-                        <th width="20%">Aksi</th>
+                        <th>Status</th>
+                        <th width="15%">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
