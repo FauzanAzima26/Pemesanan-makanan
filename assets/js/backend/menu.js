@@ -29,71 +29,82 @@ const table = $(".menuu").DataTable({
 	],
 });
 
-// Submit handler
-document
-	.getElementById("form-add-new-record")
-	.addEventListener("submit", function (e) {
-		e.preventDefault();
-		const form = e.target;
-		const formData = new FormData(form);
+// Reset form saat klik "Add New"
+$(".btn[data-bs-target='#add-new-record']").on("click", function () {
+	const form = $("#form-add-new-record")[0];
+	form.reset();
+	$("#id_menu").val("");
+	$("#old_image").val("");
+	$("#image").prop("required", true);
+	$("#preview-image").hide();
+});
 
-		$.ajax({
-			url: $("#menu-form").data("store-url"),
-			type: "POST",
-			data: formData,
-			dataType: "json",
-			processData: false,
-			contentType: false,
-			success: function (response) {
-				if (response.success) {
-					Swal.fire("Berhasil", response.message, "success");
-					form.reset();
-					bootstrap.Offcanvas.getInstance("#add-new-record").hide();
-					table.ajax.reload(null, false);
-				} else {
-					Swal.fire("Gagal", response.message, "error");
-				}
-			},
-			error: function () {
-				Swal.fire("Error", "Terjadi kesalahan saat menyimpan data", "error");
-			},
-		});
-	});
-
-$(document).on("click", ".edit", function () {
-	const id = $(this).data("id");
+// Submit handler (store atau update)
+$("#form-add-new-record").on("submit", function (e) {
+	e.preventDefault();
+	const form = this;
+	const formData = new FormData(form);
 
 	$.ajax({
-		url: base_url + "menu/edit/" + id,
-		type: "GET",
+		url: $("#menu-form").data("store-url"),
+		type: "POST",
+		data: formData,
 		dataType: "json",
+		processData: false,
+		contentType: false,
 		success: function (response) {
 			if (response.success) {
-				const data = response.data;
-
-				// Isi data ke form edit
-				$("#edit-id").val(data.id);
-				$("#edit-name").val(data.name);
-				$("#edit-price").val(data.price);
-				$("#edit-description").val(data.description);
-				// Preview gambar jika ada
-				if (data.image) {
-					$("#preview-image")
-						.attr("src", base_url + data.image)
-						.show();
-				} else {
-					$("#preview-image").hide();
-				}
-
-				// Tampilkan offcanvas/modal edit
-				const offcanvasEdit = new bootstrap.Offcanvas("#edit-record");
-				offcanvasEdit.show();
+				Swal.fire("Berhasil", response.message, "success");
+				form.reset();
+				$("#id_menu").val("");
+				bootstrap.Offcanvas.getInstance("#add-new-record").hide();
+				table.ajax.reload(null, false);
 			} else {
 				Swal.fire("Gagal", response.message, "error");
 			}
 		},
 		error: function () {
-			Swal.fire("Error", "Gagal mengambil data untuk diedit", "error");
+			Swal.fire("Error", "Terjadi kesalahan saat menyimpan data", "error");
+		},
+	});
+});
+
+// Event klik tombol Edit
+$(document).on("click", ".edit", function () {
+	const id = $(this).data("id");
+
+	$.ajax({
+		url: base_url + "menu/get_data",
+		type: "GET",
+		data: { id: id },
+		dataType: "json",
+		success: function (response) {
+			if (!response.error) {
+				$("#id_menu").val(response.id_menu);
+				$("#name").val(response.name);
+				$("#price").val(response.price);
+				$("#description").val(response.description);
+				$("#image").prop("required", false); // tidak wajib saat edit
+
+				if (response.image) {
+					$("#old_image").val(response.image);
+					$("#preview-image")
+						.attr("src", base_url + response.image)
+						.css("max-width", "100px")
+						.show();
+				} else {
+					$("#old_image").val("");
+					$("#preview-image").hide();
+				}
+
+				const offcanvas = new bootstrap.Offcanvas("#add-new-record");
+				offcanvas.show();
+			} else {
+				Swal.fire("Gagal", response.error, "error");
+			}
+		},
+		error: function () {
+			Swal.fire("Error", "Gagal mengambil data", "error");
 		},
 	});
 });

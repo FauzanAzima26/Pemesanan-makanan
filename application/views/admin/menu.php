@@ -39,6 +39,7 @@
     <div class="offcanvas-body flex-grow-1">
         <form class="add-new-record pt-0 row g-2" enctype="multipart/form-data" id="form-add-new-record" onsubmit="return false">
             <input type="hidden" name="id_menu" id="id_menu">
+            <input type="hidden" name="old_image" id="old_image">
 
             <!-- Nama menu -->
             <div class="col-sm-12">
@@ -60,8 +61,8 @@
 
             <div class="col-sm-12">
                 <label class="form-label" for="image">Upload gambar</label>
-                <input type="file" id="image" name="image" class="form-control"
-                    placeholder="Gambar" required />
+                <input type="file" id="image" name="image" class="form-control" placeholder="Gambar" />
+                <img id="preview-image" style="display: none; margin-top: 10px;" class="img-thumbnail" />
             </div>
 
             <!-- Tombol Submit -->
@@ -72,6 +73,7 @@
         </form>
     </div>
 </div>
+
 
 <!--/ DataTable with Buttons -->
 <script src="<?= base_url('assets/vendor/libs/jquery/jquery.js') ?>"></script>

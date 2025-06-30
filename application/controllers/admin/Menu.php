@@ -6,6 +6,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Input $input
  * @property MenuModel $MenuModel
  * @property CI_Upload $upload
+ * @property CI_DB $db
  */
 
 class Menu extends CI_Controller
@@ -59,8 +60,9 @@ class Menu extends CI_Controller
         ]);
     }
 
-    public function store()
+    public function store_or_update()
     {
+        $id_menu = $this->input->post('id_menu');
         $name = $this->input->post('name');
         $price = $this->input->post('price');
         $description = $this->input->post('description');
@@ -70,7 +72,6 @@ class Menu extends CI_Controller
             return;
         }
 
-        // Handle upload gambar
         $config['upload_path']   = './uploads/menu/';
         $config['allowed_types'] = 'jpg|jpeg|png|webp';
         $config['max_size']      = 2048;
@@ -78,28 +79,34 @@ class Menu extends CI_Controller
 
         $this->load->library('upload', $config);
 
+        $image = $this->input->post('old_image'); // default ke gambar lama
+
         if (!empty($_FILES['image']['name'])) {
             if (!$this->upload->do_upload('image')) {
                 echo json_encode(['success' => false, 'message' => $this->upload->display_errors()]);
                 return;
             }
-
             $upload_data = $this->upload->data();
             $image = 'uploads/menu/' . $upload_data['file_name'];
-        } else {
-            $image = null;
         }
 
-        // Simpan ke DB
         $data = [
             'name'        => $name,
             'price'       => $price,
             'description' => $description,
-            'image'       => $image,
         ];
+        if ($image) {
+            $data['image'] = $image;
+        }
 
-        $this->MenuModel->insert($data);
+        if ($id_menu) {
+            $this->db->where('id', $id_menu)->update('tb_menu', $data);
+            $message = 'Data menu berhasil diperbarui.';
+        } else {
+            $this->db->insert('tb_menu', $data);
+            $message = 'Data menu berhasil disimpan.';
+        }
 
-        echo json_encode(['success' => true, 'message' => 'Data menu berhasil disimpan.']);
+        echo json_encode(['success' => true, 'message' => $message]);
     }
 }

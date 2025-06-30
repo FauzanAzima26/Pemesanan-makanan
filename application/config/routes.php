@@ -66,7 +66,7 @@ $route['dashboard'] = 'admin/dashboard';
 
 $route['menu'] = 'admin/menu';
 $route['menu/get_data'] = 'admin/menu/get_data';
-$route['menu/store'] = 'admin/menu/store';
+$route['menu/store'] = 'admin/menu/store_or_update';
 
 $route['order'] = 'admin/pesanan';
 $route['order/get_data'] = 'admin/pesanan/get_data';
