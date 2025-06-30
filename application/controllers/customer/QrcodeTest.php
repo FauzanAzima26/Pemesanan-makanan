@@ -11,13 +11,15 @@ class QrcodeTest extends CI_Controller
     {
         parent::__construct();
         $this->load->library('Ciqrcode');
+        $this->load->library('auth'); 
+        $this->auth->customer_only();
     }
 
     public function show($order_id)
     {
         header("Content-Type: image/png");
 
-        $params['data'] = base_url("customer/order/detail/" . $order_id); // atau sesuai rute yang kamu mau
+        $params['data'] = base_url("customer/order/detail/" . $order_id);
         $params['level'] = 'H';
         $params['size'] = 5;
         $params['savename'] = false;

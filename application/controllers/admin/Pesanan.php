@@ -19,6 +19,8 @@ class Pesanan extends CI_Controller
             redirect('login');
         }
         $this->load->model('OrderModel');
+        $this->load->library('auth'); // ← harus lowercase
+        $this->auth->admin_only(); 
     }
 
     public function index()

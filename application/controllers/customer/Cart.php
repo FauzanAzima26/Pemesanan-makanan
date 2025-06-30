@@ -19,6 +19,8 @@ class Cart extends CI_Controller
         $this->load->model('MenuModel');
         $this->load->library('session');
         $this->load->helper('string');
+        $this->load->library('auth'); 
+        $this->auth->customer_only();
     }
 
     public function index()

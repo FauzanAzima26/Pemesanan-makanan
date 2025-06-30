@@ -20,6 +20,8 @@ class Menu extends CI_Controller
             redirect('login');
         }
         $this->load->model('MenuModel');
+        $this->load->library('auth'); 
+        $this->auth->admin_only(); 
     }
 
     public function index()

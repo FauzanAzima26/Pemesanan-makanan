@@ -5,11 +5,6 @@
 
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <div class="mb-3">
-        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#add-new-record">
-            <i class="ti ti-plus"></i> Add New
-        </button>
-    </div>
     <div class="card">
         <div class="card-datatable table-responsive pt-0">
             <table class="order table">
