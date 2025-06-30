@@ -44,7 +44,7 @@
                                     href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="../../assets/img/avatars/1.png" alt class="rounded-circle" />
+                                        <img src="<?= base_url('assets/img/avatars/1.png') ?>" alt class="rounded-circle" />
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -53,7 +53,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0 me-2">
                                                     <div class="avatar avatar-online">
-                                                        <img src="../../assets/img/avatars/1.png" alt class="rounded-circle" />
+                                                        <img src="<?= base_url('assets/img/avatars/1.png') ?>" alt class="rounded-circle" />
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -90,7 +90,7 @@
                                     </li>
                                     <li>
                                         <div class="d-grid px-2 pt-2 pb-1">
-                                            <a class="btn btn-sm btn-danger d-flex" href="javascript:void(0);">
+                                            <a class="btn btn-sm btn-danger d-flex" href="<?= site_url('logout') ?>">
                                                 <small class="align-middle">Logout</small>
                                                 <i class="ti ti-logout ms-2 ti-14px"></i>
                                             </a>
