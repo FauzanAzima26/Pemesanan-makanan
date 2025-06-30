@@ -32,7 +32,7 @@
   }
 }
 .landing-hero .hero-title {
-  background: linear-gradient(to right, #28c76f 0%, #5a4aff 47.92%, #ff3739 100%);
+  background: linear-gradient(to right, #ff0000 0%, #00fffd 47.92%, #daee00 100%);
   background-size: 200% auto;
   color: #444050;
   background-clip: text;
@@ -227,7 +227,7 @@
 }
 
 .light-style .landing-hero {
-  background: linear-gradient(138.18deg, #eae8fd 0%, #fce5e6 94.44%);
+  background: linear-gradient(357deg, #321dff 0%, #000000 94.44%);
 }
 .light-style .landing-hero::after {
   background-color: #fff;
