@@ -38,14 +38,10 @@ const table = $(".detail_pesanan").DataTable({
 $(document).on("click", ".detail", function () {
 	const orderId = $(this).data("id");
 
-	// Tampilkan loading atau pesan awal
-	$("#qrModalBody").html(`<p>Memuat detail untuk pesanan ID: <strong>${orderId}</strong>...</p>`);
+	$("#qrModalBody").html(`
+        <p>Detail untuk pesanan ID: <strong>${orderId}</strong></p>
+        <img src="${baseUrl}customer/qrcodetest/show/${orderId}" class="img-fluid" alt="QR Code">
+    `);
 
-	// Tampilkan modal
 	$("#qrModal").modal("show");
-
-	// (Opsional) Ambil detail data atau QR jika ingin pakai AJAX:
-	// $.get("your_url_here", { id: orderId }, function(res) {
-	//     $("#qrModalBody").html("HTML dari response AJAX");
-	// });
 });

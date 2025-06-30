@@ -13,5 +13,7 @@
 </div>
 
 <script src="<?= base_url('assets/vendor/libs/jquery/jquery.js') ?>"></script>
+<script>
+  const baseUrl = "<?= base_url() ?>";
+</script>
 <script src="<?= base_url('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') ?>"></script>
-<script src="<?= base_url('assets/js/backend/detail_pesanan.js') ?>"></script>
