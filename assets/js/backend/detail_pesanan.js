@@ -1,3 +1,5 @@
+const baseUrl = $("#detail_pesanan-form").data("base-url");
+
 const table = $(".detail_pesanan").DataTable({
 	ajax: {
 		url: $("#detail_pesanan-form").data("get-data-url"),
@@ -15,12 +17,10 @@ const table = $(".detail_pesanan").DataTable({
 		{
 			data: "status",
 			render: function (data) {
-				let badgeClass = "";
+				let badgeClass = "badge bg-secondary";
 				if (data === "paid") badgeClass = "badge bg-success";
 				else if (data === "pending") badgeClass = "badge bg-warning text-dark";
 				else if (data === "cancelled") badgeClass = "badge bg-danger";
-				else badgeClass = "badge bg-secondary";
-
 				return `<span class="${badgeClass}">${data}</span>`;
 			},
 		},
@@ -38,10 +38,24 @@ const table = $(".detail_pesanan").DataTable({
 $(document).on("click", ".detail", function () {
 	const orderId = $(this).data("id");
 
+	$("#orderIdDisplay").text(orderId);
 	$("#qrModalBody").html(`
-        <p>Detail untuk pesanan ID: <strong>${orderId}</strong></p>
-        <img src="${baseUrl}customer/qrcodetest/show/${orderId}" class="img-fluid" alt="QR Code">
-    `);
+		<div class="d-flex justify-content-center mb-3">
+			<div class="spinner-border text-primary" role="status">
+				<span class="visually-hidden">Memuat...</span>
+			</div>
+		</div>
+	`);
 
 	$("#qrModal").modal("show");
+
+	// Pastikan tidak bind berkali-kali
+	$("#qrModal").one("shown.bs.modal", function () {
+		$("#qrModalBody").html(`
+			<img src="${baseUrl}customer/qrcodetest/show/${orderId}" 
+				class="img-fluid p-2 border rounded" 
+				alt="QR Code Pesanan ${orderId}"
+				style="max-width: 100%; height: auto;">
+		`);
+	});
 });
