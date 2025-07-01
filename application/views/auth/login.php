@@ -20,7 +20,7 @@ $this->load->view('auth/template/header', ['title' => 'User Login']);
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-1">Welcome to Go rasa! 👋</h4>
+                    <h4 class="mb-1">Welcome to Go Rasa! 👋</h4>
                     <p class="mb-6">Please sign-in to your account and start the adventure</p>
 
                     <?php if ($this->session->flashdata('error')): ?>

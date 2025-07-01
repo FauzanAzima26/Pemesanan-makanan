@@ -55,7 +55,7 @@
                          </div>
                          <button class="btn btn-primary d-grid w-100 mb-6">Set new password</button>
                          <div class="text-center">
-                             <a href="auth-login-basic.html">
+                             <a href="<?= site_url('login') ?>">
                                  <i class="ti ti-chevron-left scaleX-n1-rtl me-1_5"></i>
                                  Back to login
                              </a>

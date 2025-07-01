@@ -76,7 +76,8 @@ html:not([dir=rtl]) .bg-menu-theme.menu-horizontal .menu-inner > .menu-item > .m
 }
 
 body {
-  background: #f8f7fa;
+  background: url('/pemesanan-online/assets/img/IMG_1236.JPG') no-repeat center center;
+  background-size: cover;
 }
 
 .bg-body {
