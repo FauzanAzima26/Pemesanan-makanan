@@ -80,7 +80,7 @@
               <!-- Avatar Dropdown -->
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="#" data-bs-toggle="dropdown">
-                  <div class="avatar avatar-online">
+                  <div class="avatar avatar">
                     <img src="<?= base_url('uploads/user/' . $this->session->userdata('image')) ?>" alt="Foto Profil" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;" />
                   </div>
                 </a>
@@ -89,7 +89,7 @@
                     <a class="dropdown-item mt-0" href="#">
                       <div class="d-flex align-items-center">
                         <div class="flex-shrink-0 me-2">
-                          <div class="avatar avatar-online">
+                          <div class="avatar avatar">
                             <img src="<?= base_url('uploads/user/' . $this->session->userdata('image')) ?>" alt="Foto Profil" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;" />
                           </div>
                         </div>

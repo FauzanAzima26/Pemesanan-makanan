@@ -60,4 +60,4 @@
     <script src="<?= base_url('assets/js/config.js') ?>"></script>
 </head>
 
-<body>
+<body class="auth">

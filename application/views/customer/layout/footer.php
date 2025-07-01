@@ -86,8 +86,8 @@
                 document.write(new Date().getFullYear());
               </script>
             </span>
-            <a href="https://pixinvent.com" target="_blank" class="fw-medium text-white text-white">Pixinvent,</a>
-            <span class="footer-bottom-text"> Made with ❤️ for a better web.</span>
+            <a href="https://pixinvent.com" target="_blank" class="fw-medium text-white text-white">Go Rasa.</a>
+            <span class="footer-bottom-text"> All rights reserved.</span>
           </div>
           <div>
             <a href="https://github.com/pixinvent" class="me-3" target="_blank">
