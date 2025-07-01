@@ -61,6 +61,10 @@ $route['regist'] = 'auth/register';
 $route['regist/process'] = 'auth/register/process';
 $route['regist/verify'] = 'auth/register/verify';
 
+$route['forgot_password'] = 'auth/Forgot_password';
+$route['forgot_password/send_link'] = 'auth/forgot_password/send_link';
+$route['reset_password/(:any)'] = 'auth/forgot_password/reset/$1';
+
 // admin
 $route['dashboard'] = 'admin/dashboard';
 
