@@ -11,6 +11,7 @@
           <div class="row gx-0 gy-6 g-lg-10">
             <div class="col-lg-5">
               <a href="landing-page.html" class="app-brand-link mb-6">
+                <img src="<?= base_url('assets/img/IMG_1227.JPG') ?>" alt="Logo" class="me-4" style="height: 32px;" />
                 <span class="app-brand-text demo footer-link fw-bold ms-0 ps-0">Go Rasa</span>
               </a>
               <p class="footer-text footer-logo-description mb-6">

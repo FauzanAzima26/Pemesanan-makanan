@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
 	<title>Go Rasa - Restaurant Management System</title>
+	<link rel="icon" type="image/png" href="assets/img/IMG_1226.JPG">
 
 	<meta name="description" content="Restaurant management system for modern businesses" />
 
@@ -49,7 +50,8 @@
 					<button class="navbar-toggler border-0 px-0 me-4" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 						<i class="ti ti-menu-2 ti-lg align-middle text-heading fw-medium"></i>
 					</button>
-					<a href="<?= site_url('/') ?>" class="app-brand-link">
+					<a href="<?= site_url('/') ?>" class="app-brand-link d-flex align-items-center">
+						<img src="<?= base_url('assets/img/IMG_1227.JPG') ?>" alt="Logo" style="height: 32px;" />
 						<span class="app-brand-text demo menu-text fw-bold ms-2 ps-1">Go Rasa</span>
 					</a>
 				</div>
@@ -201,6 +203,7 @@
 			<div class="row gx-0 gy-6 g-lg-10">
 				<div class="col-lg-5">
 					<a href="<?= site_url('/') ?>" class="app-brand-link mb-6">
+						<img src="<?= base_url('assets/img/IMG_1227.JPG') ?>" alt="Logo" class="me-4" style="height: 32px;" />
 						<span class="app-brand-text demo footer-link fw-bold ms-0 ps-0">Go Rasa</span>
 					</a>
 					<p class="footer-text footer-logo-description mb-6">
