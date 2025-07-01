@@ -63,6 +63,7 @@ $route['regist/verify'] = 'auth/register/verify';
 
 $route['forgot_password'] = 'auth/Forgot_password';
 $route['forgot_password/send_link'] = 'auth/forgot_password/send_link';
+$route['forgot_password/update_password'] = 'auth/forgot_password/update_password';
 $route['reset_password/(:any)'] = 'auth/forgot_password/reset/$1';
 
 // admin

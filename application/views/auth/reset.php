@@ -47,8 +47,8 @@
                                      type="password"
                                      id="confirm-password"
                                      class="form-control"
-                                     name="confirm-password"
-                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                                     name="confirm_password"
+                                     placeholder="••••••••••••"
                                      aria-describedby="password" />
                                  <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                              </div>
