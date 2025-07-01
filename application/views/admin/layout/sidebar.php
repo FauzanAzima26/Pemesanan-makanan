@@ -27,7 +27,7 @@
                 <div data-i18n="Menu">Menu</div>
             </a>
         </li>
-        <li class="menu-item <?= ($this->router->fetch_class() == 'order') ? 'active' : '' ?>">
+        <li class="menu-item <?= ($this->router->fetch_class() == 'pesanan') ? 'active' : '' ?>">
             <a href="<?= site_url('order') ?>" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-receipt-2"></i>
                 <div data-i18n="Pesanan">Pesanan</div>

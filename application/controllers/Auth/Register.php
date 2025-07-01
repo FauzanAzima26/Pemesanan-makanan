@@ -7,6 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @property CI_Session $session
  * @property userModel $userModel
  * @property CI_Input $input
+ * @property CI_Upload $upload
  */
 class Register extends CI_Controller
 {
@@ -25,6 +26,7 @@ class Register extends CI_Controller
 
     public function process()
     {
+        // Validasi form input
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[tb_users.email]');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
@@ -34,16 +36,36 @@ class Register extends CI_Controller
             redirect('regist');
         }
 
+        // Siapkan konfigurasi upload gambar
+        $config['upload_path']   = './uploads/user/';
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['max_size']      = 2048; // maksimal 2MB
+        $config['encrypt_name']  = TRUE;
+
+        $this->load->library('upload', $config);
+
+        $image_name = null;
+        if (!empty($_FILES['image']['name'])) {
+            if ($this->upload->do_upload('image')) {
+                $upload_data = $this->upload->data();
+                $image_name = $upload_data['file_name'];
+            } else {
+                $this->session->set_flashdata('error', $this->upload->display_errors());
+                redirect('regist');
+            }
+        }
+
         // Simpan user ke database
         $verification_code = mt_rand(100000, 999999);
 
         $data = [
-            'name' => $this->input->post('name'),
-            'email' => $this->input->post('email'),
-            'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'role' => 'customer',
+            'name'              => $this->input->post('name'),
+            'email'             => $this->input->post('email'),
+            'password'          => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'role'              => 'customer',
             'verification_code' => $verification_code,
-            'is_verified' => 0
+            'is_verified'       => 0,
+            'image'             => $image_name
         ];
 
         $this->userModel->insert_user($data);
@@ -53,7 +75,7 @@ class Register extends CI_Controller
         $this->session->set_userdata('verif_user_id', $user->id);
 
         // Kirim kode verifikasi ke email
-        $this->email->from('your_email@gmail.com', 'My App');
+        $this->email->from('your_email@gmail.com', 'Go Rasa');
         $this->email->to($user->email);
         $this->email->subject('Kode Verifikasi Akun');
         $this->email->message("Kode verifikasi Anda adalah: <b>$verification_code</b>");

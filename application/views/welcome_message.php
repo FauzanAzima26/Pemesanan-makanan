@@ -82,8 +82,8 @@
 							<!-- Avatar Dropdown -->
 							<li class="nav-item navbar-dropdown dropdown-user dropdown">
 								<a class="nav-link dropdown-toggle hide-arrow p-0" href="#" data-bs-toggle="dropdown">
-									<div class="avatar avatar-online">
-										<img src="<?= base_url('assets/img/avatars/1.png') ?>" alt class="rounded-circle" />
+									<div class="avatar avatar">
+										<img src="<?= base_url('uploads/user/' . $this->session->userdata('image')) ?>" alt="Foto Profil" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;" />
 									</div>
 								</a>
 								<ul class="dropdown-menu dropdown-menu-end">
@@ -92,11 +92,11 @@
 											<div class="d-flex align-items-center">
 												<div class="flex-shrink-0 me-2">
 													<div class="avatar avatar-online">
-														<img src="<?= base_url('assets/img/avatars/1.png') ?>" alt class="rounded-circle" />
+														<img src="<?= base_url('uploads/user/' . $this->session->userdata('image')) ?>" alt="Foto Profil" class="rounded-circle" style="height: 40px; width: 40px; object-fit: cover;" />
 													</div>
 												</div>
 												<div class="flex-grow-1">
-													<h6 class="mb-0"><?= $this->session->userdata('nama') ?></h6>
+													<h6 class="mb-0"><?= $this->session->userdata('name') ?></h6>
 													<small class="text-muted"><?= $this->session->userdata('role') ?></small>
 												</div>
 											</div>
@@ -104,12 +104,6 @@
 									</li>
 									<li>
 										<div class="dropdown-divider my-1 mx-n2"></div>
-									</li>
-									<li>
-										<a class="dropdown-item" href="#"><i class="ti ti-user me-3 ti-md"></i> My Profile</a>
-									</li>
-									<li>
-										<a class="dropdown-item" href="#"><i class="ti ti-settings me-3 ti-md"></i> Settings</a>
 									</li>
 									<li>
 										<div class="dropdown-divider my-1 mx-n2"></div>

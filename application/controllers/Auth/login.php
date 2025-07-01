@@ -77,6 +77,7 @@ class Login extends CI_Controller
                     'name'      => $user->name,
                     'email'     => $user->email,
                     'role'      => $user->role,
+                    'image'     => $user->image, 
                     'logged_in' => true
                 ]);
 

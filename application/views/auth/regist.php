@@ -28,7 +28,7 @@ $this->load->view('auth/template/header');
                         </div>
                     <?php endif; ?>
 
-                    <form id="formAuthentication" class="mb-6" action="<?= site_url('regist/process') ?>" method="POST">
+                    <form id="formAuthentication" class="mb-6" action="<?= site_url('regist/process') ?>" method="POST" enctype="multipart/form-data">
                         <div class="mb-6">
                             <label for="name" class="form-label">Username</label>
                             <input
@@ -56,7 +56,10 @@ $this->load->view('auth/template/header');
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
                         </div>
-
+                        <div class="mb-6">
+                            <label for="image" class="form-label">Foto/Avatar</label>
+                            <input type="file" class="form-control" id="image" name="image" accept="image/*" />
+                        </div>
                         <div class="my-8">
                             <div class="form-check mb-0 ms-2">
                                 <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms" />
