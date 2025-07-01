@@ -227,8 +227,10 @@
 }
 
 .light-style .landing-hero {
-  background: linear-gradient(357deg, #1900ffce 0%, #ff0000ea 94.44%);
+  background: url('/pemesanan-online/assets/img/IMG_1236.JPG') no-repeat center center;
+  background-size: cover;
 }
+
 .light-style .landing-hero::after {
   background-color: #fff;
 }
