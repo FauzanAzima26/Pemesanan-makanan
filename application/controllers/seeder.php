@@ -18,7 +18,7 @@ class Seeder extends CI_Controller
                 'email'        => 'admin@gmail.com',
                 'password'     => password_hash('admin123', PASSWORD_DEFAULT),
                 'role'         => 'admin',
-                'image'        => 'IMG_1227.JPG', // hanya nama file
+                'image'        => 'IMG_1248.JPG', // hanya nama file
                 'is_verified'  => 1
             ],
         ];
